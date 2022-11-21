@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.bg-noise {
+  background-image: url('@/assets/img/bg_noise.png');
+  background-size: 80px;
+}
+
+.bg-dot {
+  background-image: url('@/assets/img/bg_dot.svg');
+  background-size: 80px;
+}
+
+.transition-quick {
+  @apply transition-all duration-500;
+}
