@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="$emit('click')"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
     class="relative py-4 px-5"

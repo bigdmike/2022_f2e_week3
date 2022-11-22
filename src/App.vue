@@ -3,8 +3,13 @@
     id="app"
     class="bg-primary_black min-h-screen relative overflow-x-hidden"
   >
-    <HelloWorld />
-    <router-view />
+    <MainCover @change-status="status = $event" :status="status" />
+    <StageMenu @change-status="status = $event" :status="status" />
+    <router-view class="relative z-10" />
+    <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
+    <div
+      class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
+    ></div>
   </div>
 </template>
 
@@ -12,12 +17,18 @@
 
 <script>
 // import MainCover from '@/components/MainCover.vue';
-import HelloWorld from '@/components/MainCover.vue';
+import MainCover from '@/components/MainCover.vue';
+import StageMenu from '@/components/StageMenu.vue';
 export default {
-  name: 'MainCover',
+  name: 'App',
   components: {
-    // MainCover,
-    HelloWorld,
+    StageMenu,
+    MainCover,
+  },
+  data() {
+    return {
+      status: 'stage',
+    };
   },
 };
 </script>

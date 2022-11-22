@@ -2,7 +2,12 @@
   <div
     ref="MainContent"
     id="MainCover"
-    class="w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-30 bg-primary_black flex items-center justify-center"
+    :class="
+      status == 'cover'
+        ? 'scale-100 opacity-100 z-[12]'
+        : 'scale-[3] opacity-0 z-[10] pointer-events-none'
+    "
+    class="w-full h-screen transform transition-quick fixed top-0 left-0 right-0 bottom-0 z-30 flex items-center justify-center"
   >
     <div class="relative z-10 w-full max-w-screen-xl xl:px-0 px-10 mx-auto">
       <div class="absolute top-0 right-96 transform -translate-y-[80%]">
@@ -40,13 +45,13 @@
         />
       </div>
       <div class="flex justify-end">
-        <MainButton />
+        <MainButton @click="$emit('change-status', 'menu')" />
       </div>
     </div>
-    <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
+    <!-- <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
     <div
       class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
-    ></div>
+    ></div> -->
   </div>
 </template>
 
@@ -57,6 +62,12 @@ import TitleStar2 from '@/components/svg/star/title_star_2.vue';
 import { mouse_parallax } from '@/gsap/mouse_parallax';
 export default {
   name: 'HelloWorld',
+  props: {
+    status: {
+      require: true,
+      type: String,
+    },
+  },
   components: {
     MainButton,
     TitleStar1,
@@ -68,6 +79,21 @@ export default {
       star_mouse_parallax: null,
     };
   },
+  methods: {
+    MouseMove(event) {
+      this.title_mouse_parallax.move(event.pageX, event.pageY);
+      this.star_mouse_parallax.move(event.pageX, event.pageY);
+    },
+  },
+  watch: {
+    status() {
+      if (this.status != 'cover') {
+        window.removeEventListener('mousemove', this.MouseMove);
+      } else {
+        window.addEventListener('mousemove', this.MouseMove);
+      }
+    },
+  },
   mounted() {
     this.star_mouse_parallax = new mouse_parallax(
       this.$refs.MainContent.querySelectorAll('[data-star]'),
@@ -77,10 +103,7 @@ export default {
       this.$refs.MainContent.querySelectorAll('[data-main-title]'),
       -100
     );
-    window.addEventListener('mousemove', (event) => {
-      this.title_mouse_parallax.move(event.pageX, event.pageY);
-      this.star_mouse_parallax.move(event.pageX, event.pageY);
-    });
+    window.addEventListener('mousemove', this.MouseMove);
   },
 };
 </script>
