@@ -3,7 +3,7 @@
     :class="
       page_status == 'info'
         ? 'z-[12] -translate-x-full'
-        : 'z-[10] -translate-x-0'
+        : 'z-[12] -translate-x-0'
     "
     class="fixed top-0 left-full w-full transition-quick transform right-0 bottom-0 bg-primary_black bg-opacity-90 flex items-center justify-center"
   >

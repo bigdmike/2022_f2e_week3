@@ -1,6 +1,13 @@
 <template>
   <div
-    class="relative w-full h-screen z-10 flex justify-center items-center bg-primary_white"
+    :class="
+      page_status == 'stage'
+        ? '-translate-x-full opacity-100 z-[12]'
+        : page_status == 'info'
+        ? '-translate-x-full opacity-100 z-[10]'
+        : '-translate-x-0 opacity-0 z-[0]'
+    "
+    class="absolute top-0 left-full bottom-0 w-full h-screen flex transition-quick justify-center items-center bg-primary_white"
   >
     <div
       class="w-full max-w-screen-xl flex-wrap mx-auto flex items-stretch justify-center relative z-10"
@@ -43,6 +50,9 @@
             group-name="1"
             :get-child-payload="getCardPayload"
             @drop="onDrop('todo_list', $event)"
+            drag-class="card-ghost"
+            drop-class="card-ghost-drop"
+            :drop-placeholder="dropPlaceholderOptions"
           >
             <Draggable v-for="item in todo_list" :key="item.id">
               <div
@@ -116,6 +126,7 @@
         </div>
 
         <button
+          @click="Validate"
           @mouseenter="done_btn_hover = true"
           @mouseleave="done_btn_hover = false"
           class="relative py-2 px-4 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
@@ -180,16 +191,12 @@ export default {
   components: { Container, Draggable },
   data() {
     return {
-      upperDropPlaceholderOptions: {
-        className: 'cards-drop-preview',
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
         animationDuration: '150',
         showOnTop: true,
       },
       todo_list: [
-        {
-          id: 1,
-          title: '前台職缺列表、應徵',
-        },
         {
           id: 2,
           title: '後台職缺管理功能（資訊上架、下架、顯示應徵者資料）',
@@ -203,7 +210,12 @@ export default {
           title: '會員系統（登入、註冊、權限管理）',
         },
       ],
-      product_backlog: [],
+      product_backlog: [
+        {
+          id: 1,
+          title: '前台職缺列表、應徵',
+        },
+      ],
       done_btn_hover: false,
     };
   },
@@ -218,6 +230,9 @@ export default {
     getProductBacklogPayload(index) {
       return this.product_backlog[index];
     },
+    Validate() {
+      this.todo_list.length != 0 ? this.$emit('set-error') : '';
+    },
   },
 };
 </script>
@@ -231,28 +246,14 @@ export default {
   transition: transform 0.18s ease-in-out;
   transform: rotate(0deg);
 }
-.opacity-ghost {
-  transition: all 0.18s ease;
-  opacity: 0.8;
-  background-color: #6495ed;
-  box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.3);
+.groups {
+  display: flex;
+  justify-content: stretch;
+  margin-top: 50px;
+  margin-right: 50px;
 }
-.opacity-ghost-drop {
-  opacity: 1;
-  background-color: #fff;
-  box-shadow: 3px 3px 10px 3px transparent;
-}
-
-.drop-preview {
-  margin: 5px;
-  display: inline-block;
-}
-.cards-drop-preview,
-.drop-preview {
-  background-color: rgba(150, 150, 200, 0.1);
-  border: 1px dashed #000;
-}
-.cards-drop-preview {
-  margin: 5px 45px 5px 5px;
+.group {
+  margin-left: 50px;
+  flex: 1;
 }
 </style>

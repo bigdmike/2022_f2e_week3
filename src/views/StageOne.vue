@@ -7,7 +7,12 @@
       @change-status="page_status = $event"
       :page_status="page_status"
     />
-    <Stage @change-status="page_status = $event" :page_status="page_status" />
+    <Stage
+      @change-status="page_status = $event"
+      :page_status="page_status"
+      @set-error="error = true"
+    />
+    <ErrorCover ref="ErrorCover" :error="error" @set-error="error = false" />
   </main>
 </template>
 
@@ -15,16 +20,19 @@
 import Cover from '@/components/StageOne/Cover.vue';
 import InfoCover from '@/components/StageOne/InfoCover.vue';
 import Stage from '@/components/StageOne/Stage.vue';
+import ErrorCover from '@/components/StageOne/ErrorCover.vue';
 export default {
   name: 'StageOne',
   components: {
     Cover,
     InfoCover,
     Stage,
+    ErrorCover,
   },
   data() {
     return {
       page_status: 'cover',
+      error: false,
     };
   },
 };
