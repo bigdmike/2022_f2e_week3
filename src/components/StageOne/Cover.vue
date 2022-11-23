@@ -3,7 +3,7 @@
     :class="
       page_status == 'cover'
         ? 'scale-100 opacity-100 z-[12]'
-        : 'scale-[3] opacity-0 z-[10]'
+        : 'scale-[3] opacity-0 z-[0]'
     "
     class="fixed transform transition-quick origin-center top-0 left-0 right-0 bottom-0 z-[11] w-full h-screen flex items-center justify-center"
   >

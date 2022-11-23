@@ -7,17 +7,20 @@
       @change-status="page_status = $event"
       :page_status="page_status"
     />
+    <Stage @change-status="page_status = $event" :page_status="page_status" />
   </main>
 </template>
 
 <script>
 import Cover from '@/components/StageOne/Cover.vue';
 import InfoCover from '@/components/StageOne/InfoCover.vue';
+import Stage from '@/components/StageOne/Stage.vue';
 export default {
   name: 'StageOne',
   components: {
     Cover,
     InfoCover,
+    Stage,
   },
   data() {
     return {
