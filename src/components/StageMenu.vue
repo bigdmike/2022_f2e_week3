@@ -1,59 +1,60 @@
 <template>
   <div
     ref="MainContent"
-    id="MainCover"
-    :class="
-      status != 'menu'
-        ? status == 'cover'
-          ? 'scale-50 opacity-20 z-10 pointer-events-none'
-          : 'scale-50 opacity-0 z-10 pointer-events-none'
-        : 'scale-10 opacity-100 z-[12] '
-    "
-    class="w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-30 flex items-center justify-center transform transition-qick"
+    id="StageMenu"
+    class="w-full h-screen fixed top-0 left-full bottom-0 z-30 flex items-center justify-center transform transition-qick bg-primary_black"
   >
     <div
       class="w-full max-w-screen-xl mx-auto flex items-stretch justify-center relative z-10"
     >
       <CardOne
-        class="card_one"
+        class="card_1"
         data-x="-287"
         data-y="-50"
         data-duration="1"
         ref="CardOne"
-        :status="now_stage >= 1 ? true : false"
+        :stage="stage"
+        @click="TriggerCard(1)"
       />
       <div>
         <CardTwo
-          class="card_two"
+          class="card_2"
           data-x="0"
           data-y="-63"
           data-duration="1.5"
           ref="CardTwo"
-          :status="now_stage >= 2 ? true : false"
+          :stage="stage"
+          @click="TriggerCard(2)"
         />
         <div class="flex items-stretch">
           <div>
             <img src="/2022_f2e_week3/img/stage_image.svg" class="w-full" />
             <CardFour
-              class="card_four"
+              class="card_4"
               data-x="0"
               data-y="33"
               data-duration=".8"
               ref="CardFour"
-              :status="now_stage >= 4 ? true : false"
+              :stage="stage"
+              @click="TriggerCard(4)"
             />
           </div>
           <CardThree
-            class="card_three"
+            class="card_3"
             data-x="288"
             data-y="10"
             data-duration=".8"
             ref="CardThree"
-            :status="now_stage >= 3 ? true : false"
+            :stage="stage"
+            @click="TriggerCard(3)"
           />
         </div>
       </div>
     </div>
+    <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
+    <div
+      class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
+    ></div>
   </div>
 </template>
 
@@ -63,14 +64,9 @@ import CardTwo from '@/components/StageMenu/CardTwo.vue';
 import CardThree from '@/components/StageMenu/CardThree.vue';
 import CardFour from '@/components/StageMenu/CardFour.vue';
 import { stage_menu_card_animation } from '@/gsap/stage_menu_card';
+import { main_menu_animation } from '@/gsap/main_menu';
 export default {
   name: 'StageMenu',
-  props: {
-    status: {
-      require: true,
-      type: String,
-    },
-  },
   components: {
     CardOne,
     CardTwo,
@@ -79,70 +75,93 @@ export default {
   },
   data() {
     return {
-      now_stage: 0,
-      card_one: null,
-      card_two: null,
-      card_three: null,
-      card_four: null,
+      card_1: null,
+      card_2: null,
+      card_3: null,
+      card_4: null,
+      main_menu_animation: null,
     };
   },
   methods: {
-    Open() {
-      setTimeout(() => {
-        this.now_stage >= 1 ? '' : this.card_one.move();
-        this.now_stage >= 2 ? '' : this.card_two.move();
-        this.now_stage >= 3 ? '' : this.card_three.move();
-        this.now_stage >= 4 ? '' : this.card_four.move();
-
-        window.addEventListener('mousemove', this.MouseMove);
-      }, 300);
-    },
     MouseMove(event) {
-      this.now_stage >= 1
-        ? ''
-        : this.card_one.mouse_move(event.pageX, event.pageY);
-      this.now_stage >= 2
-        ? ''
-        : this.card_two.mouse_move(event.pageX, event.pageY);
-      this.now_stage >= 3
-        ? ''
-        : this.card_three.mouse_move(event.pageX, event.pageY);
-      this.now_stage >= 4
-        ? ''
-        : this.card_four.mouse_move(event.pageX, event.pageY);
+      this.stage > 1 ? '' : this.card_1.mouse_move(event.pageX, event.pageY);
+      this.stage > 2 ? '' : this.card_2.mouse_move(event.pageX, event.pageY);
+      this.stage > 3 ? '' : this.card_3.mouse_move(event.pageX, event.pageY);
+      this.stage > 4 ? '' : this.card_4.mouse_move(event.pageX, event.pageY);
     },
-    Close() {
-      window.removeEventListener('mousemove', this.MouseMove);
-      this.card_one.back();
-      this.card_two.back();
-      this.card_three.back();
-      this.card_four.back();
+    TriggerCard(val) {
+      if (val == this.stage) {
+        this.$router.push('/stage/' + val);
+        this.$store.commit('SetMainMenu', false);
+      } else {
+        this[`card_${val}`].shake_lock();
+      }
+    },
+  },
+  computed: {
+    status() {
+      return this.$store.state.main_menu;
+    },
+    stage() {
+      return this.$store.state.stage;
     },
   },
   watch: {
-    status(new_val, old_val) {
-      if (this.status == 'menu') {
-        this.Open();
-      } else if (old_val == 'menu') {
-        this.Close();
+    status() {
+      if (this.status) {
+        this.main_menu_animation.open();
+        setTimeout(() => {
+          this.stage > 1 ? '' : this.card_1.move();
+          this.stage > 2 ? '' : this.card_2.move();
+          this.stage > 3 ? '' : this.card_3.move();
+          this.stage > 4 ? '' : this.card_4.move();
+
+          window.addEventListener('mousemove', this.MouseMove);
+        }, 1500);
+      } else {
+        window.removeEventListener('mousemove', this.MouseMove);
+        this.card_1.back();
+        this.card_2.back();
+        this.card_3.back();
+        this.card_4.back();
+        this.main_menu_animation.close();
+      }
+    },
+    stage() {
+      if (this.stage == 1) {
+        this.card_1.unlock();
+        this.card_1.move();
+      } else if (this.stage == 2) {
+        this.card_1.back();
+        this.card_2.unlock();
+        this.card_2.move();
+      } else if (this.stage == 3) {
+        this.card_2.back();
+        this.card_3.unlock();
+        this.card_3.move();
+      } else if (this.stage == 4) {
+        this.card_3.back();
+        this.card_4.unlock();
+        this.card_4.move();
       }
     },
   },
   mounted() {
-    this.card_one = new stage_menu_card_animation(
-      this.$refs.MainContent.querySelector('.card_one'),
+    this.main_menu_animation = new main_menu_animation(this.$refs.MainContent);
+    this.card_1 = new stage_menu_card_animation(
+      this.$refs.MainContent.querySelector('.card_1'),
       30
     );
-    this.card_two = new stage_menu_card_animation(
-      this.$refs.MainContent.querySelector('.card_two'),
+    this.card_2 = new stage_menu_card_animation(
+      this.$refs.MainContent.querySelector('.card_2'),
       40
     );
-    this.card_three = new stage_menu_card_animation(
-      this.$refs.MainContent.querySelector('.card_three'),
+    this.card_3 = new stage_menu_card_animation(
+      this.$refs.MainContent.querySelector('.card_3'),
       -50
     );
-    this.card_four = new stage_menu_card_animation(
-      this.$refs.MainContent.querySelector('.card_four'),
+    this.card_4 = new stage_menu_card_animation(
+      this.$refs.MainContent.querySelector('.card_4'),
       -20
     );
   },

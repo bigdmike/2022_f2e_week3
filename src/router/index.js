@@ -1,26 +1,27 @@
+import store from '@/store';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
-  },
-  {
-    path: '/about',
-    name: 'about',
+    name: 'stage_0',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+      import(/* webpackChunkName: "stage_zero" */ '../views/StageZero.vue'),
   },
   {
     path: '/stage/1',
-    name: 'stage_one',
+    name: 'stage_1',
     component: () =>
       import(/* webpackChunkName: "stage_one" */ '../views/StageOne.vue'),
+  },
+  {
+    path: '/stage/2',
+    name: 'stage_2',
+    component: () =>
+      import(/* webpackChunkName: "stage_two" */ '../views/StageTwo.vue'),
   },
   {
     path: '/test',
@@ -33,6 +34,15 @@ const router = new VueRouter({
   mode: 'history',
   base: '/2022_f2e_week3/',
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const next_stage = to.name.split('_')[1];
+  if (next_stage != store.state.stage) {
+    next('/');
+  } else {
+    next();
+  }
 });
 
 export default router;

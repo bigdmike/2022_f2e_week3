@@ -1,15 +1,17 @@
 <template>
   <div
     class="relative select-none cursor-pointer"
+    @click="$emit('click')"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
     <IconLock
-      :class="status ? 'opacity-0' : 'opacity-100'"
-      class="w-9 text-primary absolute top-1/2 transition-quick left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+      data-lock
+      :class="stage >= 4 ? 'opacity-0' : 'opacity-100'"
+      class="w-9 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
     />
     <div
-      :class="status ? 'opacity-100' : 'opacity-20'"
+      :class="stage >= 4 ? 'opacity-100' : 'opacity-20'"
       class="transition-quick"
     >
       <div
@@ -53,8 +55,8 @@ export default {
     IconLock,
   },
   props: {
-    status: {
-      type: Boolean,
+    stage: {
+      type: Number,
     },
   },
   data() {
