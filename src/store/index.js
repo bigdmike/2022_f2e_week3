@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    stage: 0,
+    stage: 3,
     main_menu: false,
     main_dialog: {
       status: false,

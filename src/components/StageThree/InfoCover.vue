@@ -8,7 +8,10 @@
     class="fixed top-0 left-full w-full transition-quick transform right-0 bottom-0 bg-primary_black bg-opacity-90 flex items-center justify-center"
   >
     <div class="w-full max-w-screen-md mx-auto relative">
-      <img src="/2022_f2e_week3/img/stage_two_info.png" class="w-full mb-10" />
+      <img
+        src="/2022_f2e_week3/img/stage_three_info.png"
+        class="w-full mb-10"
+      />
       <div class="flex items-center justify-end">
         <button
           @click="$emit('change-status', 'stage')"

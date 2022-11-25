@@ -7,24 +7,30 @@
         ? '-translate-x-full opacity-100 z-[10]'
         : '-translate-x-0 opacity-0 z-[0]'
     "
-    class="absolute top-0 left-full bottom-0 w-full h-screen flex transition-quick justify-center items-center bg-primary_white"
+    class="absolute top-0 bottom-0 flex items-center justify-center w-full h-screen left-full transition-quick bg-primary_white"
   >
     <div
-      class="w-full max-w-screen-xl flex-wrap mx-auto flex items-stretch justify-center relative z-10"
+      class="relative z-10 flex flex-wrap items-stretch justify-center w-full max-w-screen-xl mx-auto"
     >
-      <div class="w-1/2 pr-10 flex flex-col">
-        <div
-          class="w-full h-full border border-primary_white p-10 flex-1 flex flex-col"
-        >
-          <h4
-            class="font-panchang font-bold text-2xl text-center text-primary_black mb-5"
-          >
-            Product Backlog
-          </h4>
-          <p class="font-bold text-primary_black text-center mb-10">
-            請拖曳產品待辦事項在限制點數內，來完成短衝待辦清單
-          </p>
-          <Container
+      <div class="relative flex flex-col w-3/5 pr-10">
+        <div class="flex flex-col flex-1 w-full h-full">
+          <div class="relative w-full">
+            <div
+              class="absolute top-0 w-2/5 h-20 transform border border-dashed right-20 bg-primary_black bg-opacity-5 rounded-2xl border-primary_white"
+            ></div>
+            <div
+              class="absolute bottom-0 w-2/5 h-20 transform -translate-x-full translate-y-full border border-dashed right-24 bg-primary_black bg-opacity-5 rounded-2xl border-primary_white"
+            ></div>
+            <div
+              class="absolute bottom-0 w-2/5 h-20 transform translate-y-full border border-dashed right-20 bg-primary_black bg-opacity-5 rounded-2xl border-primary_white"
+            ></div>
+            <img
+              src="/2022_f2e_week3/img/sprint_img.png"
+              class="relative z-0 w-full"
+            />
+          </div>
+
+          <!-- <Container
             class="flex-1"
             group-name="1"
             :get-child-payload="getCardPayload"
@@ -35,96 +41,71 @@
           >
             <Draggable v-for="item in todo_list" :key="item.id">
               <div
-                class="card draggable-item px-8 py-6 mb-9 bg-primary_white text-lg font-black text-primary_black select-none rounded-2xl relative"
+                class="relative px-8 py-6 text-lg font-black select-none card draggable-item mb-9 bg-primary_white text-primary_black rounded-2xl"
               >
                 <span
-                  class="bg-primary_black text-primary_white text-sm font-panchang py-1 absolute top-0 left-14 transform -translate-y-1/2 px-3 rounded-full"
-                  >+<b class="font-panchang text-lg">{{ item.point }}</b
+                  class="absolute top-0 px-3 py-1 text-sm transform -translate-y-1/2 rounded-full bg-primary_black text-primary_white font-panchang left-14"
+                  >+<b class="text-lg font-panchang">{{ item.point }}</b
                   >point</span
                 >
                 {{ item.title }}
               </div>
             </Draggable>
-          </Container>
+          </Container> -->
         </div>
       </div>
-      <div class="w-1/2 pl-10">
-        <div
-          class="w-full h-full border border-primary_white p-10 flex flex-col"
-        >
-          <h4
-            class="font-panchang font-bold text-2xl text-center text-primary_black mb-5"
-          >
-            Sprint Backlog
-          </h4>
-          <p class="font-bold text-primary_black text-center mb-5">
-            開發A組端中代辦清單 20點/5人
-          </p>
-          <div
-            class="w-full relative flex-1 flex flex-col border border-dashed border-primary_white rounded-2xl"
-          >
-            <div class="relative flex-1 flex-col flex h-full">
-              <p
-                v-if="product_backlog.length <= 0"
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary_white select-none"
+      <div class="w-2/5 pl-10">
+        <div class="flex flex-col w-full h-full">
+          <div class="relative z-10 w-full p-10">
+            <i
+              class="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary_black"
+            ></i>
+            <i
+              class="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary_black"
+            ></i>
+            <i
+              class="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary_black"
+            ></i>
+            <i
+              class="absolute top-0 right-0 w-5 h-5 border-t border-r border-primary_black"
+            ></i>
+            <div
+              class="absolute bottom-0 right-0 flex items-center transform translate-y-1/2"
+            >
+              <h2
+                class="mr-5 text-2xl italic font-semibold text-primary_black font-gambetta"
               >
-                請將卡片拖曳至此
-              </p>
-              <Container
-                class="flex-1 relative z-10 py-10 px-3"
-                group-name="1"
-                :get-child-payload="getProductBacklogPayload"
-                @drop="onDrop('product_backlog', $event)"
-              >
-                <Draggable v-for="item in product_backlog" :key="item.id">
-                  <div
-                    class="card draggable-item px-10 py-4 mb-9 bg-primary_white text-lg font-black text-primary_black select-none inline-block relative"
-                  >
-                    <span
-                      class="bg-primary_black text-primary_white text-sm font-panchang py-1 absolute top-0 left-14 transform -translate-y-1/2 px-3 rounded-full"
-                      >+<b class="font-panchang text-lg">{{ item.point }}</b
-                      >point</span
-                    >
-                    {{ item.title }}
-                  </div>
-                </Draggable>
-              </Container>
+                Development Team
+              </h2>
+              <img
+                src="/2022_f2e_week3/img/purple_ghost.svg"
+                class="block mr-10 transform w-11 h-11 -scale-x-100"
+              />
             </div>
-            <div class="flex">
-              <div class="w-1/2 py-5 text-center">
-                <p
-                  :class="
-                    total_point > 20 ? 'text-red-700' : 'text-secondary_blue'
-                  "
-                  class="mb-2 font-bold"
+            <p class="font-medium text-primary_black">
+              換你來試試看，在這經典的Scrum流程圖中，這些流程分別代表哪個會議呢？把對應的流程拖曳到正確的位置上！
+            </p>
+          </div>
+          <div class="relative flex flex-col flex-1 h-full">
+            <Container
+              class="relative z-10 flex-1 px-10 py-10"
+              group-name="1"
+              :get-child-payload="getCardPayload"
+              @drop="onDrop('product_backlog', $event)"
+            >
+              <Draggable v-for="item in todo_list" :key="item.id">
+                <div
+                  class="relative px-10 py-4 text-lg font-black select-none card draggable-item mb-9 bg-primary_white text-primary_black"
                 >
-                  目前點數
-                </p>
-                <p
-                  :class="
-                    total_point > 20 ? 'text-red-700' : 'text-secondary_blue'
-                  "
-                  class="font-bold font-panchang"
-                >
-                  <b class="font-bold text-xl font-panchang">{{
-                    total_point | number
-                  }}</b
-                  >point
-                </p>
-              </div>
-              <div
-                class="w-1/2 py-5 text-center border-t border-l border-primary_white border-dashed"
-              >
-                <p class="text-primary_black mb-2 font-bold">團隊負擔點數</p>
-                <p class="text-primary_black font-bold font-panchang">
-                  <b class="font-bold text-xl font-panchang">20</b>point
-                </p>
-              </div>
-            </div>
+                  <p>{{ item.title }}</p>
+                  <p class="font-panchang">{{ item.sub_title }}</p>
+                </div>
+              </Draggable>
+            </Container>
           </div>
         </div>
       </div>
-      <div class="w-full mt-10 flex items-center justify-between">
+      <div class="flex items-center justify-between w-full mt-10">
         <div class="flex items-center">
           <p>使用工具</p>
           <img src="/2022_f2e_week3/img/logo_jira.png" />
@@ -134,35 +115,35 @@
           @click="Validate"
           @mouseenter="done_btn_hover = true"
           @mouseleave="done_btn_hover = false"
-          class="relative py-2 px-4 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
+          class="relative px-4 py-2 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
         >
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 left-0 w-2 h-2 border-l border-t transition-quick"
+            class="absolute top-0 left-0 z-0 w-2 h-2 border-t border-l transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 left-0 w-2 h-2 border-l border-b transition-quick"
+            class="absolute bottom-0 left-0 z-0 w-2 h-2 border-b border-l transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 right-0 w-2 h-2 border-r border-b transition-quick"
+            class="absolute bottom-0 right-0 z-0 w-2 h-2 border-b border-r transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 right-0 w-2 h-2 border-r border-t transition-quick"
+            class="absolute top-0 right-0 z-0 w-2 h-2 border-t border-r transition-quick"
           ></i>
           <p
             :class="done_btn_hover ? 'bg-secondary_green' : ''"
-            class="font-bold font-panchang text-2xl relative z-10 py-2 px-16 block transition-quick"
+            class="relative z-10 block px-16 py-2 text-2xl font-bold font-panchang transition-quick"
           >
             Done
           </p>
@@ -204,23 +185,18 @@ export default {
       todo_list: [
         {
           id: 1,
-          title: '後台職缺管理功能（資訊上架、下架、顯示應徵者資料）',
-          point: 8,
+          title: '短衝自省會議',
+          sub_title: 'Sprint Retrospective',
         },
         {
           id: 2,
-          title: '會員系統（登入、註冊、權限管理）',
-          point: 8,
+          title: '每日站立會議',
+          sub_title: 'Daily Scrum',
         },
         {
           id: 3,
-          title: '應徵者的線上履歷編輯器',
-          point: 13,
-        },
-        {
-          id: 4,
-          title: '前台職缺列表、應徵',
-          point: 5,
+          title: '短衝檢視會議',
+          sub_title: 'Sprint Review',
         },
       ],
       product_backlog: [],

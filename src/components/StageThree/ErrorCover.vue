@@ -9,7 +9,7 @@
     >
       <p class="font-panchang text-primary_white font-bold mb-3">Oops!</p>
       <p class="font-bold text-primary_white mb-12">
-        短衝待辦清單點數不得超過團隊所能負擔點數
+        還不夠熟悉 Sprint 流程嗎？沒關係！再來複習一次
       </p>
       <button
         @click="$emit('set-error')"

@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Cover from '@/components/StageTwo/Cover.vue';
-import InfoCover from '@/components/StageTwo/InfoCover.vue';
-import Stage from '@/components/StageTwo/Stage.vue';
-import ErrorCover from '@/components/StageTwo/ErrorCover.vue';
+import Cover from '@/components/StageThree/Cover.vue';
+import InfoCover from '@/components/StageThree/InfoCover.vue';
+import Stage from '@/components/StageThree/Stage.vue';
+import ErrorCover from '@/components/StageThree/ErrorCover.vue';
 export default {
   name: 'StageThree',
   components: {
