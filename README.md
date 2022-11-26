@@ -1,6 +1,6 @@
 # 2022 F2E Scrum Tutorial
 
-![封面圖](https://images.thef2e.com/2022/works/12061549261449566305_2022-11-20T08:35:46.056Z.png)
+![封面圖](https://github.com/bigdmike/2022_f2e_week3/blob/main/public/img/cover.png)
 
 ## 作品說明
 
