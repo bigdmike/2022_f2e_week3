@@ -7,36 +7,36 @@
         ? '-translate-x-full opacity-100 z-[10]'
         : '-translate-x-0 opacity-0 z-[0]'
     "
-    class="absolute top-0 left-full bottom-0 w-full h-screen flex transition-quick justify-center items-center bg-primary_white"
+    class="absolute top-0 bottom-0 flex items-center justify-center w-full h-screen left-full transition-quick bg-primary_white"
   >
     <div
-      class="w-full max-w-screen-xl flex-wrap mx-auto flex items-stretch justify-center relative z-10"
+      class="relative z-10 flex flex-wrap items-stretch justify-center w-full max-w-screen-xl mx-auto"
     >
-      <div class="w-1/2 pr-10 flex flex-col">
-        <div class="w-full relative z-10 p-10 mb-14">
+      <div class="flex flex-col w-1/2 pr-10">
+        <div class="relative z-10 w-full p-10 mb-14">
           <i
-            class="absolute top-0 left-0 w-5 h-5 border-l border-t border-primary_black"
+            class="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary_black"
           ></i>
           <i
-            class="absolute bottom-0 left-0 w-5 h-5 border-l border-b border-primary_black"
+            class="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary_black"
           ></i>
           <i
-            class="absolute bottom-0 right-0 w-5 h-5 border-r border-b border-primary_black"
+            class="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary_black"
           ></i>
           <i
-            class="absolute top-0 right-0 w-5 h-5 border-r border-t border-primary_black"
+            class="absolute top-0 right-0 w-5 h-5 border-t border-r border-primary_black"
           ></i>
           <div
-            class="flex items-end absolute bottom-0 right-14 transform translate-y-1/2"
+            class="absolute bottom-0 flex items-end transform translate-y-1/2 right-14"
           >
             <h2
-              class="text-primary_black font-semibold font-gambetta italic text-2xl mr-5"
+              class="mr-5 text-2xl italic font-semibold text-primary_black font-gambetta"
             >
               Product Owner
             </h2>
             <img
               src="/2022_f2e_week3/img/green_ghost.svg"
-              class="w-11 h-11 block transform -scale-x-100"
+              class="block transform w-11 h-11 -scale-x-100"
             />
           </div>
           <p class="font-medium text-primary_black">
@@ -44,7 +44,7 @@
             我們公司也推薦使用 Jira 來做任務的管理呢！
           </p>
         </div>
-        <div class="w-full flex-1 flex flex-col">
+        <div class="flex flex-col flex-1 w-full">
           <Container
             class="flex-1"
             group-name="1"
@@ -56,9 +56,21 @@
           >
             <Draggable v-for="item in todo_list" :key="item.id">
               <div
-                class="card draggable-item px-10 py-4 mb-9 bg-primary_white text-lg font-black text-primary_black select-none inline-block"
+                class="relative inline-block p-2 text-lg transition-all select-none card draggable-item mb-9 bg-primary_white hover:bg-secondary_green text-primary_black"
               >
-                {{ item.title }}
+                <i
+                  class="absolute top-0 left-0 z-0 w-2 h-2 border-t border-l border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute bottom-0 left-0 z-0 w-2 h-2 border-b border-l border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute bottom-0 right-0 z-0 w-2 h-2 border-b border-r border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute top-0 right-0 z-0 w-2 h-2 border-t border-r border-transparent transition-quick"
+                ></i>
+                <p class="px-8 py-2 font-black">{{ item.title }}</p>
               </div>
             </Draggable>
           </Container>
@@ -66,17 +78,17 @@
       </div>
       <div class="w-1/2 pl-10">
         <div
-          class="w-full h-full border border-primary_white p-10 flex flex-col"
+          class="flex flex-col w-full h-full p-10 border border-primary_white"
         >
           <h4
-            class="font-panchang font-bold text-2xl text-center text-primary_black mb-5"
+            class="mb-5 text-2xl font-bold text-center font-panchang text-primary_black"
           >
             Product Backlog
           </h4>
-          <p class="font-bold text-primary_black text-center mb-5">優先度高</p>
-          <div class="w-full relative flex-1">
+          <p class="mb-5 font-bold text-center text-primary_black">優先度高</p>
+          <div class="relative flex-1 w-full">
             <div
-              class="absolute top-0 left-0 z-10 right-0 bottom-0 flex flex-col"
+              class="absolute top-0 bottom-0 left-0 right-0 z-10 flex flex-col"
             >
               <Container
                 class="flex-1"
@@ -86,40 +98,40 @@
               >
                 <Draggable v-for="item in product_backlog" :key="item.id">
                   <div
-                    class="card draggable-item w-full py-7 rounded-2xl text-primary_black text-lg font-black text-center bg-primary_white border-dashed mb-5"
+                    class="w-full mb-5 text-lg font-black text-center transition-all duration-300 border-dashed select-none card draggable-item py-7 rounded-2xl text-primary_black bg-primary_white hover:bg-secondary_green"
                   >
                     {{ item.title }}
                   </div>
                 </Draggable>
               </Container>
             </div>
-            <ol class="w-full relative z-0">
+            <ol class="relative z-0 w-full">
               <li
-                class="w-full py-7 rounded-2xl text-primary_white text-center font-medium border-primary_white border-2 border-dashed mb-5"
+                class="w-full mb-5 font-medium text-center border-2 border-dashed py-7 rounded-2xl text-primary_white border-primary_white"
               >
                 將卡片拖曳至此
               </li>
               <li
-                class="w-full py-7 rounded-2xl text-primary_white text-center font-medium border-primary_white border-2 border-dashed mb-5"
+                class="w-full mb-5 font-medium text-center border-2 border-dashed py-7 rounded-2xl text-primary_white border-primary_white"
               >
                 將卡片拖曳至此
               </li>
               <li
-                class="w-full py-7 rounded-2xl text-primary_white text-center font-medium border-primary_white border-2 border-dashed mb-5"
+                class="w-full mb-5 font-medium text-center border-2 border-dashed py-7 rounded-2xl text-primary_white border-primary_white"
               >
                 將卡片拖曳至此
               </li>
               <li
-                class="w-full py-7 rounded-2xl text-primary_white text-center font-medium border-primary_white border-2 border-dashed mb-5"
+                class="w-full mb-5 font-medium text-center border-2 border-dashed py-7 rounded-2xl text-primary_white border-primary_white"
               >
                 將卡片拖曳至此
               </li>
             </ol>
           </div>
-          <p class="font-bold text-primary_black text-center">優先度低</p>
+          <p class="font-bold text-center text-primary_black">優先度低</p>
         </div>
       </div>
-      <div class="w-full mt-10 flex items-center justify-between">
+      <div class="flex items-center justify-between w-full mt-10">
         <div class="flex items-center">
           <p>使用工具</p>
           <img src="/2022_f2e_week3/img/logo_jira.png" />
@@ -129,35 +141,35 @@
           @click="Validate"
           @mouseenter="done_btn_hover = true"
           @mouseleave="done_btn_hover = false"
-          class="relative py-2 px-4 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
+          class="relative px-4 py-2 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
         >
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 left-0 w-2 h-2 border-l border-t transition-quick"
+            class="absolute top-0 left-0 z-0 w-2 h-2 border-t border-l transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 left-0 w-2 h-2 border-l border-b transition-quick"
+            class="absolute bottom-0 left-0 z-0 w-2 h-2 border-b border-l transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 right-0 w-2 h-2 border-r border-b transition-quick"
+            class="absolute bottom-0 right-0 z-0 w-2 h-2 border-b border-r transition-quick"
           ></i>
           <i
             :class="
               done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 right-0 w-2 h-2 border-r border-t transition-quick"
+            class="absolute top-0 right-0 z-0 w-2 h-2 border-t border-r transition-quick"
           ></i>
           <p
             :class="done_btn_hover ? 'bg-secondary_green' : ''"
-            class="font-bold font-panchang text-2xl relative z-10 py-2 px-16 block transition-quick"
+            class="relative z-10 block px-16 py-2 text-2xl font-bold font-panchang transition-quick"
           >
             Done
           </p>
@@ -243,10 +255,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card-ghost {
-  transition: transform 0.18s ease;
-  transform: rotate(5deg);
+  background-color: transparent;
+}
+.card-ghost i {
+  border-color: black;
+}
+.card-ghost p {
+  background-color: rgb(11 218 149);
 }
 .card-ghost-drop {
   transition: transform 0.18s ease-in-out;

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative select-none cursor-pointer"
+    class="relative cursor-pointer select-none"
     @click="$emit('click')"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
@@ -8,12 +8,21 @@
     <IconLock
       data-lock
       :class="stage >= 4 ? 'opacity-0' : 'opacity-100'"
-      class="w-9 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+      class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 w-9 text-primary top-1/2 left-1/2"
+    />
+    <img
+      v-if="stage > 4"
+      src="/2022_f2e_week3/img/done_tag/done_tag-2.svg"
+      class="w-11/12 absolute z-10 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1 rotate-[20deg] origin-center"
     />
     <div
-      :class="stage >= 4 ? 'opacity-100' : 'opacity-20'"
+      :class="stage == 4 ? 'opacity-100' : 'opacity-20'"
       class="transition-quick"
     >
+      <CardStar
+        :class="hover ? 'scale-110' : 'scale-100'"
+        class="absolute text-white transform bottom-2 transition-quick right-5"
+      />
       <div
         :class="hover ? 'border-primary' : 'border-primary_white'"
         class="w-[126px] h-[126px] border-b border-x transition-quick relative z-0 flex items-center justify-start px-3"
@@ -25,7 +34,7 @@
           ></span>
           <h3
             :class="hover ? 'text-primary' : 'text-primary_white'"
-            class="font-panchang px-2 transition-quick leading-none transform -translate-y-1/2 text-2xl font-bold flex-shrink-0"
+            class="flex-shrink-0 px-2 text-2xl font-bold leading-none transform -translate-y-1/2 font-panchang transition-quick"
           >
             Lv.4
           </h3>
@@ -37,9 +46,9 @@
         <div>
           <h4
             :class="hover ? 'text-primary' : 'text-primary_white'"
-            class="text-xl font-bold font-panchang transition-quick mb-5"
+            class="mb-5 text-xl font-bold font-panchang transition-quick"
           >
-            Sprint<br />流程
+            Retro<br />問與答
           </h4>
         </div>
       </div>
@@ -49,10 +58,12 @@
 
 <script>
 import IconLock from '@/components/svg/icon_lock.vue';
+import CardStar from '@/components/svg/star/card_star_4.vue';
 export default {
   name: 'CardTwo',
   components: {
     IconLock,
+    CardStar,
   },
   props: {
     stage: {

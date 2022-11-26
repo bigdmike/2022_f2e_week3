@@ -30,9 +30,16 @@ const routes = [
       import(/* webpackChunkName: "stage_three" */ '../views/StageThree.vue'),
   },
   {
-    path: '/test',
-    name: 'test',
-    component: () => import(/* webpackChunkName: "test" */ '../views/test.vue'),
+    path: '/stage/4',
+    name: 'stage_4',
+    component: () =>
+      import(/* webpackChunkName: "stage_four" */ '../views/StageFour.vue'),
+  },
+  {
+    path: '/stage/finish',
+    name: 'stage_finish',
+    component: () =>
+      import(/* webpackChunkName: "stage_finish" */ '../views/StageFinish.vue'),
   },
 ];
 
@@ -44,7 +51,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const next_stage = to.name.split('_')[1];
-  if (next_stage != store.state.stage) {
+  if (
+    next_stage != store.state.stage &&
+    next_stage != 'finish' &&
+    next_stage != 0
+  ) {
     next('/');
   } else {
     next();

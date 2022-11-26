@@ -35,5 +35,14 @@ export default {
       error: false,
     };
   },
+  watch: {
+    page_status() {
+      if (this.page_status == 'cover') {
+        this.$store.commit('SetHeaderColor', 'white');
+      } else {
+        this.$store.commit('SetHeaderColor', 'black');
+      }
+    },
+  },
 };
 </script>

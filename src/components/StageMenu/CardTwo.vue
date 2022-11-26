@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative select-none cursor-pointer"
+    class="relative cursor-pointer select-none"
     @click="$emit('click')"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
@@ -8,17 +8,21 @@
     <IconLock
       data-lock
       :class="stage >= 2 ? 'opacity-0' : 'opacity-100'"
-      class="w-16 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+      class="absolute z-10 w-16 transform -translate-x-1/2 -translate-y-1/2 text-primary top-1/2 left-1/2"
     />
     <img
       v-if="stage > 2"
       src="/2022_f2e_week3/img/done_tag/done_tag-2.svg"
-      class="w-11/12 absolute z-10 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1 rotate-[20deg] origin-center"
+      class="w-11/12 absolute z-10 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[20deg] origin-center"
     />
     <div
       :class="stage == 2 ? 'opacity-100' : 'opacity-20'"
       class="transition-quick"
     >
+      <CardStar
+        :class="hover ? 'scale-110' : 'scale-100'"
+        class="absolute text-white transform transition-quick top-14 right-8"
+      />
       <div
         :class="hover ? 'border-primary' : 'border-primary_white'"
         class="w-[330px] h-[330px] border-b border-x transition-quick relative z-0 flex items-center justify-start px-14 transition-quick"
@@ -54,10 +58,12 @@
 
 <script>
 import IconLock from '@/components/svg/icon_lock.vue';
+import CardStar from '@/components/svg/star/card_star_2.vue';
 export default {
   name: 'CardTwo',
   components: {
     IconLock,
+    CardStar,
   },
   props: {
     stage: {

@@ -2,9 +2,9 @@
   <div
     ref="MainContent"
     id="MainCover"
-    class="w-full h-screen transform transition-quick fixed top-0 left-0 right-0 bottom-0 z-30 flex items-center justify-center"
+    class="fixed top-0 bottom-0 left-0 right-0 z-30 flex items-center justify-center w-full h-screen transform transition-quick"
   >
-    <div class="relative z-10 w-full max-w-screen-xl xl:px-0 px-10 mx-auto">
+    <div class="relative z-10 w-full max-w-screen-xl px-10 mx-auto xl:px-0">
       <div class="absolute top-0 right-96 transform -translate-y-[80%]">
         <TitleStar1 data-star class="text-primary_white" />
       </div>
@@ -27,8 +27,8 @@
       </div>
       <div class="flex items-center justify-between mb-20">
         <div class="mr-24">
-          <p class="text-primary_white font-bold">
-            <b class="font-gambetta font-medium italic text-5xl mr-5">Hi,</b>
+          <p class="font-bold text-primary_white">
+            <b class="mr-5 text-5xl italic font-medium font-gambetta">Hi,</b>
             歡迎加入 Pacman 資訊，在正式加入專案開發之前，需要請你先了解 Scrum
             的流程與精神！ 請接受挑戰任務，成功通過 Scrum 新手村的挑戰任務吧！
           </p>
@@ -45,7 +45,7 @@
     </div>
     <!-- <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
+      class="absolute top-0 bottom-0 left-0 right-0 z-0 bg-noise mix-blend-overlay"
     ></div> -->
   </div>
 </template>
@@ -75,9 +75,11 @@ export default {
     },
     NextStage() {
       this.$store.commit('SetMainMenu', true);
-      setTimeout(() => {
-        this.$store.commit('SetStage', 1);
-      }, 2500);
+      if (this.stage == 0) {
+        setTimeout(() => {
+          this.$store.commit('SetStage', 1);
+        }, 2500);
+      }
     },
   },
   watch: {
@@ -101,6 +103,7 @@ export default {
       this.$refs.MainContent.querySelectorAll('[data-main-title]'),
       -100
     );
+    this.$store.commit('SetHeaderColor', 'white');
     window.addEventListener('mousemove', this.MouseMove);
   },
 };

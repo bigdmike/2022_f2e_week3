@@ -1,15 +1,16 @@
 <template>
   <div
     id="app"
-    class="bg-primary_black min-h-screen relative overflow-x-hidden"
+    class="relative min-h-screen overflow-x-hidden bg-primary_black"
   >
     <StageMenu />
-    <div ref="RouterView" class="fixed top-0 left-0 w-full h-full z-10">
+    <MainHeader />
+    <div ref="RouterView" class="fixed top-0 left-0 z-10 w-full h-full">
       <router-view />
     </div>
     <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
+      class="absolute top-0 bottom-0 left-0 right-0 z-0 bg-noise mix-blend-overlay"
     ></div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 
 <script>
 import StageMenu from '@/components/StageMenu.vue';
+import MainHeader from '@/components/MainHeader.vue';
 import { stage_animation } from '@/gsap/stage';
 export default {
   name: 'App',
   components: {
     StageMenu,
+    MainHeader,
   },
   data() {
     return {

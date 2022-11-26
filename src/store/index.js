@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    stage: 3,
+    stage: 1,
+    header_color: 'white',
     main_menu: false,
     main_dialog: {
       status: false,
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     SetStage(state, next_stage) {
       state.stage = next_stage;
+    },
+    SetHeaderColor(state, color) {
+      state.header_color = color;
     },
   },
   actions: {},

@@ -2,10 +2,10 @@
   <div
     ref="MainContent"
     id="StageMenu"
-    class="w-full h-screen fixed top-0 left-full bottom-0 z-30 flex items-center justify-center transform transition-qick bg-primary_black"
+    class="fixed top-0 bottom-0 z-30 flex items-center justify-center w-full h-screen transform left-full transition-qick bg-primary_black"
   >
     <div
-      class="w-full max-w-screen-xl mx-auto flex items-stretch justify-center relative z-10"
+      class="relative z-10 flex items-stretch justify-center w-full max-w-screen-xl mx-auto"
     >
       <CardOne
         class="card_1"
@@ -53,7 +53,7 @@
     </div>
     <div class="absolute top-0 left-0 right-0 bottom-0 z-[1] bg-dot"></div>
     <div
-      class="absolute top-0 left-0 right-0 bottom-0 z-0 bg-noise mix-blend-overlay"
+      class="absolute top-0 bottom-0 left-0 right-0 z-0 bg-noise mix-blend-overlay"
     ></div>
   </div>
 </template>
@@ -91,7 +91,9 @@ export default {
     },
     TriggerCard(val) {
       if (val == this.stage) {
-        this.$router.push('/stage/' + val);
+        this.$route.name != `stage_${val}`
+          ? this.$router.push('/stage/' + val)
+          : '';
         this.$store.commit('SetMainMenu', false);
       } else {
         this[`card_${val}`].shake_lock();
@@ -110,6 +112,7 @@ export default {
     status() {
       if (this.status) {
         this.main_menu_animation.open();
+        this.$store.commit('SetHeaderColor', 'white');
         setTimeout(() => {
           this.stage > 1 ? '' : this.card_1.move();
           this.stage > 2 ? '' : this.card_2.move();
@@ -143,6 +146,12 @@ export default {
         this.card_3.back();
         this.card_4.unlock();
         this.card_4.move();
+      } else if (this.stage == 5) {
+        this.card_4.back();
+        setTimeout(() => {
+          this.$router.push('/stage/finish');
+          this.$store.commit('SetMainMenu', false);
+        }, 2000);
       }
     },
   },

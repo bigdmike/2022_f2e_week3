@@ -10,7 +10,7 @@
     <div
       class="relative flex flex-col items-center justify-start w-full h-screen max-w-screen-xl px-10 pb-20 mx-auto xl:px-0"
     >
-      <div class="flex items-center justify-start flex-1 w-full">
+      <div class="relative flex flex-col justify-center flex-1 w-full">
         <div class="w-[636px] relative z-10 p-10">
           <i
             class="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary_white"
@@ -28,28 +28,28 @@
             class="absolute top-0 flex items-center transform -translate-y-1/2 left-14"
           >
             <img
-              src="/2022_f2e_week3/img/green_ghost.svg"
+              src="/2022_f2e_week3/img/purple_ghost.svg"
               class="block mr-10 w-11 h-11"
             />
             <h2
               class="text-5xl italic font-medium text-primary_white font-gambetta"
             >
-              Hello
+              Development Team
             </h2>
           </div>
           <p class="font-medium text-primary_white">
-            我是 Pacman 資訊，開發 A 組的 PO。 PO 也就是產品負責人（Product
-            Owner），產品負責人會負責評估產品待辦清單的價值與重要性，依序排列要執行的優先順序，對齊產品目標。最後排出產品待辦清單（Product
-            Backlog）唷！
-            剛好我最近手邊有一個『人才招募系統』的案子，我才剛列出了『產品需求清單』。
-            既然你都來了，來試試看調整產品優先度，排出產品待辦清單吧！
+            哇你很幸運喔，今天剛好是開發 B 組的 Retro，你也來見識一下，看看
+            Retro 都該做些什麼吧，
+            我們會在會議裡請團隊成員提出哪些是做得好的地方、哪些可以繼續改善的地方，並記錄再
+            Confluence 中。Retro
+            重點在於『正面表述』，你也思考看看，哪一些是適合 Retro 的回饋吧！
           </p>
         </div>
       </div>
 
       <div class="relative flex items-center justify-between w-full">
         <BackButton @click="$router.push('/')" />
-        <MainButton @click="$emit('change-status', 'info')" />
+        <MainButton @click="$emit('change-status', 'stage')" />
       </div>
     </div>
   </main>

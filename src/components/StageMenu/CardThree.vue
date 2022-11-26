@@ -1,19 +1,28 @@
 <template>
   <div
-    class="relative select-none cursor-pointer"
+    class="relative cursor-pointer select-none"
     @click="$emit('click')"
     @mouseenter="hover = true"
     @mouseleave="hover = false"
   >
     <IconLock
       data-lock
-      :class="stage >= 3 ? 'opacity-0' : 'opacity-100'"
-      class="w-9 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+      :class="stage >= 3 ? 'opacity-0' : ''"
+      class="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 w-9 text-primary top-1/2 left-1/2"
+    />
+    <img
+      v-if="stage > 3"
+      src="/2022_f2e_week3/img/done_tag/done_tag-1.svg"
+      class="w-11/12 absolute z-10 transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1 rotate-[-20deg] origin-center"
     />
     <div
-      :class="stage >= 3 ? 'opacity-100' : 'opacity-20'"
+      :class="stage == 3 ? 'opacity-100' : 'opacity-20'"
       class="transition-quick"
     >
+      <CardStar
+        :class="hover ? 'scale-110' : 'scale-100'"
+        class="absolute text-white transform -translate-y-1/2 transition-quick top-1/2 right-5"
+      />
       <div
         :class="hover ? 'border-primary' : 'border-primary_white'"
         class="w-[204px] h-[204px] border-b border-x transition-quick relative z-0 flex items-center justify-start px-6 transition-quick"
@@ -25,7 +34,7 @@
           ></span>
           <h3
             :class="hover ? 'text-primary' : 'text-primary_white'"
-            class="font-panchang px-4 leading-none transform transition-quick -translate-y-1/2 text-2xl font-bold flex-shrink-0"
+            class="flex-shrink-0 px-4 text-2xl font-bold leading-none transform -translate-y-1/2 font-panchang transition-quick"
           >
             Lv.3
           </h3>
@@ -37,7 +46,7 @@
         <div>
           <h4
             :class="hover ? 'text-primary' : 'text-primary_white'"
-            class="text-2xl font-bold font-panchang transition-quick mb-5"
+            class="mb-5 text-2xl font-bold font-panchang transition-quick"
           >
             Sprint<br />流程
           </h4>
@@ -49,10 +58,12 @@
 
 <script>
 import IconLock from '@/components/svg/icon_lock.vue';
+import CardStar from '@/components/svg/star/card_star_3.vue';
 export default {
   name: 'CardThree',
   components: {
     IconLock,
+    CardStar,
   },
   props: {
     stage: {

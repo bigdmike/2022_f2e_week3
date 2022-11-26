@@ -7,21 +7,21 @@
         ? '-translate-x-full opacity-100 z-[10]'
         : '-translate-x-0 opacity-0 z-[0]'
     "
-    class="absolute top-0 left-full bottom-0 w-full h-screen flex transition-quick justify-center items-center bg-primary_white"
+    class="absolute top-0 bottom-0 flex items-center justify-center w-full h-screen left-full transition-quick bg-primary_white"
   >
     <div
-      class="w-full max-w-screen-xl flex-wrap mx-auto flex items-stretch justify-center relative z-10"
+      class="relative z-10 flex flex-wrap items-stretch justify-center w-full max-w-screen-xl mx-auto"
     >
-      <div class="w-1/2 pr-10 flex flex-col">
+      <div class="flex flex-col w-1/2 pr-10">
         <div
-          class="w-full h-full border border-primary_white p-10 flex-1 flex flex-col"
+          class="flex flex-col flex-1 w-full h-full p-10 border border-primary_white"
         >
           <h4
-            class="font-panchang font-bold text-2xl text-center text-primary_black mb-5"
+            class="mb-5 text-2xl font-bold text-center font-panchang text-primary_black"
           >
             Product Backlog
           </h4>
-          <p class="font-bold text-primary_black text-center mb-10">
+          <p class="mb-10 font-bold text-center text-primary_black">
             請拖曳產品待辦事項在限制點數內，來完成短衝待辦清單
           </p>
           <Container
@@ -35,14 +35,26 @@
           >
             <Draggable v-for="item in todo_list" :key="item.id">
               <div
-                class="card draggable-item px-8 py-6 mb-9 bg-primary_white text-lg font-black text-primary_black select-none rounded-2xl relative"
+                class="relative p-2 text-lg font-black transition-all duration-300 select-none card draggable-item mb-9 bg-primary_white text-primary_black rounded-2xl hover:text-white hover:bg-secondary_blue"
               >
                 <span
-                  class="bg-primary_black text-primary_white text-sm font-panchang py-1 absolute top-0 left-14 transform -translate-y-1/2 px-3 rounded-full"
-                  >+<b class="font-panchang text-lg">{{ item.point }}</b
+                  class="absolute top-0 px-3 py-1 text-sm transform -translate-y-1/2 rounded-full bg-primary_black text-primary_white font-panchang left-14"
+                  >+<b class="text-lg font-panchang">{{ item.point }}</b
                   >point</span
                 >
-                {{ item.title }}
+                <i
+                  class="absolute top-0 left-0 z-0 w-2 h-2 border-t border-l border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute bottom-0 left-0 z-0 w-2 h-2 border-b border-l border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute bottom-0 right-0 z-0 w-2 h-2 border-b border-r border-transparent transition-quick"
+                ></i>
+                <i
+                  class="absolute top-0 right-0 z-0 w-2 h-2 border-t border-r border-transparent transition-quick"
+                ></i>
+                <p class="px-6 py-4">{{ item.title }}</p>
               </div>
             </Draggable>
           </Container>
@@ -50,39 +62,39 @@
       </div>
       <div class="w-1/2 pl-10">
         <div
-          class="w-full h-full border border-primary_white p-10 flex flex-col"
+          class="flex flex-col w-full h-full p-10 border border-primary_white"
         >
           <h4
-            class="font-panchang font-bold text-2xl text-center text-primary_black mb-5"
+            class="mb-5 text-2xl font-bold text-center font-panchang text-primary_black"
           >
             Sprint Backlog
           </h4>
-          <p class="font-bold text-primary_black text-center mb-5">
+          <p class="mb-5 font-bold text-center text-primary_black">
             開發A組端中代辦清單 20點/5人
           </p>
           <div
-            class="w-full relative flex-1 flex flex-col border border-dashed border-primary_white rounded-2xl"
+            class="relative flex flex-col flex-1 w-full border border-dashed border-primary_white rounded-2xl"
           >
-            <div class="relative flex-1 flex-col flex h-full">
+            <div class="relative flex flex-col flex-1 h-full">
               <p
                 v-if="product_backlog.length <= 0"
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary_white select-none"
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 select-none top-1/2 left-1/2 text-primary_white"
               >
                 請將卡片拖曳至此
               </p>
               <Container
-                class="flex-1 relative z-10 py-10 px-3"
+                class="relative z-10 flex-1 px-3 py-10"
                 group-name="1"
                 :get-child-payload="getProductBacklogPayload"
                 @drop="onDrop('product_backlog', $event)"
               >
                 <Draggable v-for="item in product_backlog" :key="item.id">
                   <div
-                    class="card draggable-item px-10 py-4 mb-9 bg-primary_white text-lg font-black text-primary_black select-none inline-block relative"
+                    class="relative inline-block px-10 py-4 text-lg font-black select-none card draggable-item mb-9 bg-primary_white text-primary_black"
                   >
                     <span
-                      class="bg-primary_black text-primary_white text-sm font-panchang py-1 absolute top-0 left-14 transform -translate-y-1/2 px-3 rounded-full"
-                      >+<b class="font-panchang text-lg">{{ item.point }}</b
+                      class="absolute top-0 px-3 py-1 text-sm transform -translate-y-1/2 rounded-full bg-primary_black text-primary_white font-panchang left-14"
+                      >+<b class="text-lg font-panchang">{{ item.point }}</b
                       >point</span
                     >
                     {{ item.title }}
@@ -106,25 +118,25 @@
                   "
                   class="font-bold font-panchang"
                 >
-                  <b class="font-bold text-xl font-panchang">{{
+                  <b class="text-xl font-bold font-panchang">{{
                     total_point | number
                   }}</b
                   >point
                 </p>
               </div>
               <div
-                class="w-1/2 py-5 text-center border-t border-l border-primary_white border-dashed"
+                class="w-1/2 py-5 text-center border-t border-l border-dashed border-primary_white"
               >
-                <p class="text-primary_black mb-2 font-bold">團隊負擔點數</p>
-                <p class="text-primary_black font-bold font-panchang">
-                  <b class="font-bold text-xl font-panchang">20</b>point
+                <p class="mb-2 font-bold text-primary_black">團隊負擔點數</p>
+                <p class="font-bold text-primary_black font-panchang">
+                  <b class="text-xl font-bold font-panchang">20</b>point
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="w-full mt-10 flex items-center justify-between">
+      <div class="flex items-center justify-between w-full mt-10">
         <div class="flex items-center">
           <p>使用工具</p>
           <img src="/2022_f2e_week3/img/logo_jira.png" />
@@ -134,35 +146,35 @@
           @click="Validate"
           @mouseenter="done_btn_hover = true"
           @mouseleave="done_btn_hover = false"
-          class="relative py-2 px-4 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
+          class="relative px-4 py-2 transition-quick bg-trasnparent text-primary_black hover:text-primary_black"
         >
           <i
             :class="
-              done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
+              done_btn_hover ? 'border-secondary_blue' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 left-0 w-2 h-2 border-l border-t transition-quick"
+            class="absolute top-0 left-0 z-0 w-2 h-2 border-t border-l transition-quick"
           ></i>
           <i
             :class="
-              done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
+              done_btn_hover ? 'border-secondary_blue' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 left-0 w-2 h-2 border-l border-b transition-quick"
+            class="absolute bottom-0 left-0 z-0 w-2 h-2 border-b border-l transition-quick"
           ></i>
           <i
             :class="
-              done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
+              done_btn_hover ? 'border-secondary_blue' : 'border-primary_black'
             "
-            class="absolute z-0 bottom-0 right-0 w-2 h-2 border-r border-b transition-quick"
+            class="absolute bottom-0 right-0 z-0 w-2 h-2 border-b border-r transition-quick"
           ></i>
           <i
             :class="
-              done_btn_hover ? 'border-secondary_green' : 'border-primary_black'
+              done_btn_hover ? 'border-secondary_blue' : 'border-primary_black'
             "
-            class="absolute z-0 top-0 right-0 w-2 h-2 border-r border-t transition-quick"
+            class="absolute top-0 right-0 z-0 w-2 h-2 border-t border-r transition-quick"
           ></i>
           <p
-            :class="done_btn_hover ? 'bg-secondary_green' : ''"
-            class="font-bold font-panchang text-2xl relative z-10 py-2 px-16 block transition-quick"
+            :class="done_btn_hover ? 'bg-secondary_blue' : ''"
+            class="relative z-10 block px-16 py-2 text-2xl font-bold font-panchang transition-quick"
           >
             Done
           </p>
@@ -265,11 +277,23 @@ export default {
 };
 </script>
 
-<style>
-.card-ghost {
+<style scoped>
+/* .card-ghost {
   transition: transform 0.18s ease;
   transform: rotate(5deg);
+} */
+
+.card-ghost {
+  background-color: transparent;
 }
+.card-ghost i {
+  border-color: black;
+}
+.card-ghost p {
+  background-color: rgb(13 13 242);
+  color: white;
+}
+
 .card-ghost-drop {
   transition: transform 0.18s ease-in-out;
   transform: rotate(0deg);
