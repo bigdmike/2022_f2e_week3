@@ -1,0 +1,1 @@
+.card-ghost{transition:transform .18s ease;transform:rotate(5deg)}.card-ghost-drop{transition:transform .18s ease-in-out;transform:rotate(0deg)}.groups{display:flex;justify-content:stretch;margin-top:50px;margin-right:50px}.group{margin-left:50px;flex:1}
